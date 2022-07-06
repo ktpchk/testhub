@@ -1,32 +1,36 @@
 <x-layout>
+  <x-slot name="title">Поиск тестов</x-slot>
   <x-slot name="left">
-    <h2 class="text-4xl mb-6">Попробовать свои силы</h2>
-    <x-test-list>
-      @foreach ($tests as $test)
-        <x-test-list-item :test=$test />
-      @endforeach
-    </x-test-list>
-    <a href="test/list.html" class="inline-block text-classicBlue-900 hover:text-classicBlue-100">
-      Смотреть все тесты
-      <i class="fa-solid fa-arrow-right-long"></i>
-    </a>
+    @include('partials._search')
+    @unless(count($tests) == 0)
+      <x-test-list>
+        @foreach ($tests as $test)
+          <x-test-list-item :test=$test />
+        @endforeach
+      </x-test-list>
+      <div class="mt-4">
+        {{ $tests->withQueryString()->links() }}
+      </div>
+    @else
+      @if ($searchValue)
+        <div class="">Не найдены тесты по запросу "{{ $searchValue }}"</div>
+      @else
+        <div class="">Здесь пока нет тестов</div>
+      @endif
+    @endunless
   </x-slot>
   <x-slot name="right">
-    <h2 class="text-4xl">О сайте</h2>
     <div class="text-sm space-y-2">
       <p>
-        TestHub — это сервис, который позволяет вам легко создавать
-        тесты для проверки знаний и просматривать результаты в удобном
-        интерфейсе. Для создания и прохождения теста не требуется
-        регистрация, но мы советуем это сделать, так как в этом случае
-        вы легко сможете управлять своими тестами.
+        Чтобы найти нужный вам тест, введите тему, имя пользователя
+        или ключевые слова в поле поиска. Тесты выводятся по убыванию
+        популярности.
       </p>
-      <p>Присоединяйтесь к сообществу TestHub!</p>
     </div>
     <div class="flex justify-around">
-      <a href=""
+      <a href="new.html"
         class="inline-block p-2 rounded-full bg-classicBlue-300 text-classicPink-300 hover:bg-classicBlue-50">
-        Создать тест
+        Создать свой тест
       </a>
     </div>
   </x-slot>

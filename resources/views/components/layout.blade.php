@@ -18,7 +18,7 @@
       <div class="container mx-auto">
         <div class="flex justify-between items-center py-2">
           <h1 class="text-6xl">
-            <a href="index.html" class="">TestHub</a>
+            <a href="/" class="">TestHub</a>
           </h1>
           <nav class="flex space-x-24 text-lg">
             <ul class="flex space-x-6">
@@ -46,8 +46,8 @@
     </header>
     <main class="flex-auto bg-classicPink-400">
       <div class="container mx-auto">
-        {{ $title ?? '' }}
-        <div class="flex mt-6">
+        <h2 class="text-4xl mt-6">{{ $title ?? '' }}</h2>
+        <div class="flex my-6">
           <div class="w-3/5">
             {{ $left }}
           </div>

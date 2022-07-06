@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TestController;
 use App\Models\Test;
 use Illuminate\Support\Facades\Route;
 
@@ -14,8 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('tests.index', [
-        'tests' => Test::all()
-    ]);
+Route::controller(TestController::class)->group(function () {
+    Route::get('/', 'welcome');
+    Route::get('/tests', 'index');
 });

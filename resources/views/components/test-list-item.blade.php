@@ -5,7 +5,7 @@
     </a>
     <x-taglist :test=$test />
   </td>
-  <td class="pt-2 text-center">
+  <td class="pt-2 text-center text-sm">
     {{ $test->passed }} / {{ $test->tried }}
   </td>
   <td class="text-center pt-2">
