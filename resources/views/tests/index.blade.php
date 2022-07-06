@@ -2,11 +2,9 @@
   <x-slot name="left">
     <h2 class="text-4xl mb-6">Попробовать свои силы</h2>
     <x-test-list>
-      <x-test-list-item />
-      <x-test-list-item />
-      <x-test-list-item />
-      <x-test-list-item />
-      <x-test-list-item />
+      @foreach ($tests as $test)
+        <x-test-list-item :test=$test />
+      @endforeach
     </x-test-list>
     <a href="test/list.html" class="inline-block text-classicBlue-900 hover:text-classicBlue-100">
       Смотреть все тесты

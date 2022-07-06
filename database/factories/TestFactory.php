@@ -17,7 +17,7 @@ class TestFactory extends Factory
             'name' => $this->faker->sentence(3),
             'tried' => random_int(100, 200),
             'passed' => random_int(50, 99),
-            'tags' => $this->faker->word() . ', ' . $this->faker->word() . ', ' . $this->faker->word() . ', ',
+            'tags' => $this->faker->word() . ', ' . $this->faker->word() . ', ' . $this->faker->word(),
         ];
     }
 }

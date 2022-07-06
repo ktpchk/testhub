@@ -1,13 +1,13 @@
 <li class="flex justify-between items-center">
   <div class="flex flex-col">
     <a href="" class="text-classicBlue-900 hover:text-classicBlue-100">
-      Тест по арифметике
+      {{ $test->name }}
     </a>
-    <x-taglist />
+    <x-taglist :test=$test />
   </div>
   <div class="flex space-x-6 items-center">
     <div class="text-sm">
-      2 600 / 12 500
+      {{ $test->passed }} / {{ $test->tried }}
     </div>
     <div class="">
       <a href=""

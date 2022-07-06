@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Test;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('tests.index');
+    return view('tests.index', [
+        'tests' => Test::all()
+    ]);
 });
