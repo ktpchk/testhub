@@ -1,7 +1,9 @@
-<div class="flex justify-between pb-1 border-black border-b-2">
-  <p>Название</p>
-  <p class="mr-9">прошло / сдавало</p>
-</div>
-<ul class="text-xl space-y-2 mb-6">
-  {{ $slot }}
-</ul>
+<table class="w-full mb-2">
+  <thead class="border-b-2 border-black">
+    <th class="text-left pb-2">Название</th>
+    <th class="text-center pb-2">прошло / сдавало</th>
+  </thead>
+  <tbody>
+    {{ $slot }}
+  </tbody>
+</table>
