@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreTestRequest;
 use App\Models\Test;
 use Illuminate\Http\Request;
 
@@ -28,8 +29,9 @@ class TestController extends Controller
         return view('tests.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreTestRequest $request)
     {
-        dd($request->all());
+        $formFields = $request->validated();
+        dd($formFields);
     }
 }
