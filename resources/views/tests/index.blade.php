@@ -28,7 +28,7 @@
       </p>
     </div>
     <div class="flex justify-around">
-      <a href="new.html"
+      <a href="/tests/create"
         class="inline-block p-2 rounded-full bg-classicBlue-300 text-classicPink-300 hover:bg-classicBlue-50">
         Создать свой тест
       </a>

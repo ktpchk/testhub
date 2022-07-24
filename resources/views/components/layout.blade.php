@@ -14,7 +14,7 @@
 
 <body class="h-full">
   <div class="flex flex-col min-h-full overflow-hidden">
-    <header class="bg-classicBlue-400 text-classicPink-300 shadow z-10">
+    <header class="bg-classicBlue-400 text-classicPink-300 shadow z-10" id="header">
       <div class="container mx-auto">
         <div class="flex justify-between items-center py-2">
           <h1 class="text-6xl">
@@ -51,7 +51,7 @@
           <div class="w-3/5">
             {{ $left }}
           </div>
-          <div class="w-1/3 space-y-6 mr-0 ml-auto">
+          <div class="w-1/3 space-y-6 mr-0 ml-auto text-sm">
             {{ $right }}
           </div>
         </div>
@@ -65,6 +65,7 @@
       </div>
     </footer>
   </div>
+  {{ $scripts ?? '' }}
 </body>
 
 </html>

@@ -18,4 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::controller(TestController::class)->group(function () {
     Route::get('/', 'welcome');
     Route::get('/tests', 'index');
+    Route::get('/tests/create', 'create');
+    Route::post('/tests/store', 'store');
 });

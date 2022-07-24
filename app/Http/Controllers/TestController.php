@@ -22,4 +22,14 @@ class TestController extends Controller
             'searchValue' => $searchValue
         ]);
     }
+
+    public function create()
+    {
+        return view('tests.create');
+    }
+
+    public function store(Request $request)
+    {
+        dd($request->all());
+    }
 }

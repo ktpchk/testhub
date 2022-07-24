@@ -17,7 +17,7 @@
       </div>
       <div>
         <span
-          class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-classicPink-300 bg-classicBlue-300 border-x border-classicPink-300 cursor-default leading-5">
+          class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-classicPink-300 bg-classicBlue-900 border-x border-classicPink-300 cursor-default leading-5">
           {{ $paginator->currentPage() }}
         </span>
       </div>

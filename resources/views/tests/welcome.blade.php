@@ -28,7 +28,7 @@
       <p>Присоединяйтесь к сообществу TestHub!</p>
     </div>
     <div class="flex justify-around">
-      <a href=""
+      <a href="/tests/create"
         class="inline-block p-2 rounded-full bg-classicBlue-300 text-classicPink-300 hover:bg-classicBlue-50">
         Создать тест
       </a>
