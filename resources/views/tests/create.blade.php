@@ -1,7 +1,7 @@
 <x-layout>
   <x-slot name="title">Создать новый тест</x-slot>
   <x-slot name="left">
-    <form action="/tests/store" method="POST" class="flex flex-col">
+    <form action="/tests/store" method="POST" class="flex flex-col" name="test">
       @csrf
       <div class="mb-2">
         <label for="testName">Название</label>
@@ -115,5 +115,7 @@
     <script src="{{ asset('js/sticky-sidebar.js') }}"></script>
     <script src="{{ asset('js/form-buttons.js') }}"></script>
     <script src="{{ asset('js/form-interactive.js') }}"></script>
+    <script src="{{ asset('js/form-storing.js') }}"></script>
+
   </x-slot>
 </x-layout>

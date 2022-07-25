@@ -2,7 +2,6 @@ const totalQuestions = document.getElementById("totalQuestions");
 const totalPoints = document.getElementById("totalPoints");
 const timePerQuestion = document.getElementById("timePerQuestion");
 const testTime = document.getElementById("testTime");
-// const rightPanel = document.getElementById("rightPanel");
 
 document.addEventListener("click", function (event) {
     let target = event.target.closest(".questionAdder,.deleteQuestion");

@@ -45,6 +45,6 @@ class StoreTestRequest extends FormRequest
                 $rules['questions.' . $questionKey . '.answers.' . $answerKey . '.text'] = '';
             }
         }
-        dd($rules);
+        return ($rules);
     }
 }

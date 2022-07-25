@@ -2,12 +2,13 @@ class Question {
     constructor(button) {
         const questionTemplate = document.getElementById("questionTemplate");
         let clone = questionTemplate.content.firstElementChild.cloneNode(true);
-        button.before(clone);
         this.node = clone;
         this.answers = [];
-        this.type = "oneVariant";
         this.points = 0;
         Question.questions.push(this);
+
+        button.before(clone);
+
         Question.fillMeta();
         clone.querySelector(".answerAdder").click();
     }
@@ -26,6 +27,10 @@ class Question {
         for (let i = 0; i < Question.questions.length; i++) {
             let question = Question.questions[i];
             question.number = i;
+            let savedType = sessionStorage.getItem(
+                `questions[${question.number}][type]`
+            );
+            question.type = savedType ?? "oneVariant";
 
             let questionNode = question.node;
             questionNode.querySelector(".questionNumber").textContent =
@@ -174,4 +179,6 @@ function setPoints(event) {
     question.points = target.value;
 }
 
-document.querySelector(".questionAdder").click();
+if (sessionStorage.length == 0) {
+    document.querySelector(".questionAdder").click();
+}
