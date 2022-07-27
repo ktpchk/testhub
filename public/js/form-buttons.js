@@ -5,6 +5,7 @@ class Question {
         this.node = clone;
         this.answers = [];
         this.points = 0;
+        this.type = "";
         Question.questions.push(this);
 
         button.before(clone);
@@ -27,10 +28,16 @@ class Question {
         for (let i = 0; i < Question.questions.length; i++) {
             let question = Question.questions[i];
             question.number = i;
+
             let savedType = sessionStorage.getItem(
                 `questions[${question.number}][type]`
             );
             question.type = savedType ?? "oneVariant";
+
+            let savedPoints = sessionStorage.getItem(
+                `questions[${question.number}][points]`
+            );
+            question.points = savedPoints ?? 0;
 
             let questionNode = question.node;
             questionNode.querySelector(".questionNumber").textContent =

@@ -35,14 +35,14 @@
         <ul>
           <li>
             <label>
-              <input type="checkbox" name="options" />
+              <input type="checkbox" name="options[]" value="detailedResults" />
               Разрешить смотреть список неправильных ответов после
               теста
             </label>
           </li>
           <li>
             <label>
-              <input type="checkbox" name="options" />
+              <input type="checkbox" name="options[]" value="publicResults" />
               Сделать все результаты прохождения публичными
             </label>
           </li>
@@ -114,8 +114,8 @@
     <script src="{{ asset('js/ResizeSensor.js') }}"></script>
     <script src="{{ asset('js/sticky-sidebar.js') }}"></script>
     <script src="{{ asset('js/form-buttons.js') }}"></script>
-    <script src="{{ asset('js/form-interactive.js') }}"></script>
     <script src="{{ asset('js/form-storing.js') }}"></script>
+    <script src="{{ asset('js/form-interactive.js') }}"></script>
 
   </x-slot>
 </x-layout>

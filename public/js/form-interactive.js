@@ -6,38 +6,27 @@ const testTime = document.getElementById("testTime");
 document.addEventListener("click", function (event) {
     let target = event.target.closest(".questionAdder,.deleteQuestion");
     if (!target) return;
-    render("questions");
-    render("time");
+    render();
 });
 
-function render(field) {
+function render() {
     if (typeof Question != "function") return;
-    if (field == "all" || field == "questions") {
-        totalQuestions.textContent = Question.questions.length ?? 0;
-    }
-    if (field == "all" || field == "points") {
-        totalPoints.textContent =
-            Question.questions.reduce((sum, item) => sum + +item.points, 0) ??
-            0;
-    }
-    if (field == "all" || field == "time") {
-        timePerQuestion.textContent = Math.round(
-            testTime.value / Question.questions.length
-        );
-    }
+    totalQuestions.textContent = Question.questions.length ?? 0;
+    totalPoints.textContent =
+        Question.questions.reduce((sum, item) => sum + +item.points, 0) ?? 0;
+    timePerQuestion.textContent =
+        Math.round(testTime.value / Question.questions.length) ?? 0;
 }
 
 document.addEventListener("input", function (event) {
     let target = event.target.closest('[name$="[points]"],#testTime');
     if (!target) return;
-    if (target.id == "testTime") {
-        render("time");
-    } else {
-        render("points");
-    }
+    render();
 });
 
-render("all");
+window.onload = function () {
+    render();
+};
 
 // Sticky Right Panel
 
