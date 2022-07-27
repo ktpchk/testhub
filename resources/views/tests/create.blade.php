@@ -73,7 +73,7 @@
 
       <button type="submit"
         class="p-2 w-1/2 rounded-full bg-classicBlue-300 text-2xl text-classicPink-300 hover:bg-classicBlue-50 self-center">
-        Сохранить тест
+        Отправить
       </button>
     </form>
 
@@ -98,7 +98,7 @@
               просмотра результатов.
             </p>
           </div>
-          <ul class="flex flex-col justify-around">
+          <ul class="flex flex-col justify-around mt-2 pb-2 border-black border-b-2">
             <li>Всего вопросов: <span id="totalQuestions" class="bg-classicBlue-400 text-classicPink-300 px-2">0</span>
             </li>
             <li>Всего баллов: <span id="totalPoints" class="bg-classicBlue-400 text-classicPink-300 px-2">0</span></li>
@@ -106,6 +106,13 @@
                 class="bg-classicBlue-400 text-classicPink-300 px-2">0</span>
             </li>
           </ul>
+          <div class="mt-2 flex flex-col">
+            <button type="button"
+              class="p-1.5 rounded-full bg-classicBlue-300 text-classicPink-300 hover:bg-classicBlue-50 resetForm">
+              Начать заново
+            </button>
+          </div>
+
         </div>
       </div>
     </div>

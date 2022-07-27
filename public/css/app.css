@@ -627,6 +627,9 @@ video {
 .-ml-px {
   margin-left: -1px;
 }
+.mt-2 {
+  margin-top: 0.5rem;
+}
 .inline-block {
   display: inline-block;
 }
@@ -785,6 +788,11 @@ video {
   --tw-space-y-reverse: 0;
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}
+.space-x-12 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(3rem * var(--tw-space-x-reverse));
+  margin-left: calc(3rem * calc(1 - var(--tw-space-x-reverse)));
 }
 .self-start {
   align-self: flex-start;

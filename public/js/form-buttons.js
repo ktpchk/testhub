@@ -29,12 +29,12 @@ class Question {
             let question = Question.questions[i];
             question.number = i;
 
-            let savedType = sessionStorage.getItem(
+            let savedType = localStorage.getItem(
                 `questions[${question.number}][type]`
             );
             question.type = savedType ?? "oneVariant";
 
-            let savedPoints = sessionStorage.getItem(
+            let savedPoints = localStorage.getItem(
                 `questions[${question.number}][points]`
             );
             question.points = savedPoints ?? 0;
@@ -186,6 +186,16 @@ function setPoints(event) {
     question.points = target.value;
 }
 
-if (sessionStorage.length == 0) {
+document.addEventListener("click", function (event) {
+    let target = event.target.closest(".resetForm");
+    if (!target) return;
+
+    if (confirm("Это действие необратимо. Вы уверены?")) {
+        localStorage.clear();
+        location.reload();
+    }
+});
+
+if (localStorage.length == 0) {
     document.querySelector(".questionAdder").click();
 }

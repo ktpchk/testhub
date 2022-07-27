@@ -2,7 +2,7 @@ const form = document.forms.test;
 let elements = form.elements;
 
 function saveFormData() {
-    sessionStorage.clear();
+    localStorage.clear();
 
     let userInputs = new Set();
     for (element of elements) {
@@ -21,15 +21,15 @@ function saveFormData() {
                     value.push(option.value);
                 }
             }
-            sessionStorage.setItem(input, JSON.stringify(value));
+            localStorage.setItem(input, JSON.stringify(value));
         } else {
-            sessionStorage.setItem(input, elements[input].value);
+            localStorage.setItem(input, elements[input].value);
         }
     }
 }
 
 function restoreFields() {
-    let savedTestFields = Object.keys(sessionStorage).filter((item) =>
+    let savedTestFields = Object.keys(localStorage).filter((item) =>
         item.match(/^questions\[\d\]\[answers\]/)
     );
 
@@ -53,18 +53,18 @@ function restoreFields() {
 }
 
 function load() {
-    let oldValues = Object.keys(sessionStorage);
+    let oldValues = Object.keys(localStorage);
     for (let key of oldValues) {
         if (elements[key]) {
             if (key.endsWith("[]")) {
-                let value = JSON.parse(sessionStorage.getItem(key));
+                let value = JSON.parse(localStorage.getItem(key));
                 for (let option of elements[key]) {
                     if (value.includes(option.value)) {
                         option.checked = true;
                     }
                 }
             } else {
-                elements[key].value = sessionStorage.getItem(key);
+                elements[key].value = localStorage.getItem(key);
             }
         }
     }
