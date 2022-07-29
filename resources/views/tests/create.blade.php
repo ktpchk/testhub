@@ -106,13 +106,19 @@
                 class="bg-classicBlue-400 text-classicPink-300 px-2">0</span>
             </li>
           </ul>
-          <div class="mt-2 flex flex-col">
+
+          <div class="mt-2 pb-2 border-black border-b-2 space-y-2" id="navPanel">
+            <h3 class="text-xl text-center">Навигация по вопросам</h3>
+            <ul class="navContainer grid grid-cols-10 gap-2 justify-items-center">
+
+            </ul>
+          </div>
+          <div class="mt-2 flex flex-col ">
             <button type="button"
               class="p-1.5 rounded-full bg-classicBlue-300 text-classicPink-300 hover:bg-classicBlue-50 resetForm">
               Начать заново
             </button>
           </div>
-
         </div>
       </div>
     </div>

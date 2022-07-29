@@ -40,6 +40,9 @@ class Question {
             question.points = savedPoints ?? 0;
 
             let questionNode = question.node;
+
+            questionNode.id = "question_" + (question.number + 1);
+
             questionNode.querySelector(".questionNumber").textContent =
                 question.number + 1;
 
