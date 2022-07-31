@@ -1,5 +1,6 @@
 const form = document.forms.test;
 let elements = form.elements;
+let saveFormButton = document.getElementById("saveForm");
 
 function saveFormData() {
     localStorage.clear();
@@ -14,7 +15,7 @@ function saveFormData() {
     userInputs.shift();
 
     for (let input of userInputs) {
-        if (input.endsWith("[]")) {
+        if (input.endsWith("[]") && elements[input].length) {
             let value = [];
             for (let option of elements[input]) {
                 if (option.checked) {
@@ -26,6 +27,7 @@ function saveFormData() {
             localStorage.setItem(input, elements[input].value);
         }
     }
+    window.formStatus = "saved";
 }
 
 function restoreFields() {
@@ -56,7 +58,7 @@ function load() {
     let oldValues = Object.keys(localStorage);
     for (let key of oldValues) {
         if (elements[key]) {
-            if (key.endsWith("[]")) {
+            if (key.endsWith("[]") && elements[key].length) {
                 let value = JSON.parse(localStorage.getItem(key));
                 for (let option of elements[key]) {
                     if (value.includes(option.value)) {
@@ -70,6 +72,61 @@ function load() {
     }
 }
 
+function traceChange() {
+    window.formStatus = "modified";
+    saveFormButton.disabled = false;
+    saveFormButton.classList.remove("bg-classicBlue-50", "bg-opacity-60");
+    saveFormButton.classList.add(
+        "bg-classicBlue-300",
+        "hover:bg-classicBlue-50"
+    );
+}
+function traceSave() {
+    window.formStatus = "saved";
+    saveFormButton.disabled = true;
+    saveFormButton.classList.remove(
+        "bg-classicBlue-300",
+        "hover:bg-classicBlue-50"
+    );
+    saveFormButton.classList.add("bg-classicBlue-50", "bg-opacity-60");
+}
+
+document.addEventListener("click", function (event) {
+    let target = event.target.closest(".resetForm,#saveForm");
+    if (!target) return;
+
+    if (target.classList.contains("resetForm")) {
+        if (confirm("Это действие необратимо. Вы уверены?")) {
+            window.resetForm = true;
+            localStorage.clear();
+            location.reload();
+        }
+    } else if (target.id == "saveForm") {
+        saveFormData();
+        traceSave();
+    }
+});
+form.addEventListener("change", traceChange);
+document.addEventListener("click", function (e) {
+    let target = e.target.closest(
+        ".questionAdder,.deleteQuestion,.answerAdder,.deleteAnswer"
+    );
+    if (!target) return;
+    traceChange();
+});
+window.onbeforeunload = function (e) {
+    if (window.formStatus == "saved" || window.resetForm) return;
+    e.preventDefault();
+    e.returnValue = "";
+};
+form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    saveFormData();
+    window.onbeforeunload = null;
+    this.submit();
+});
+
 restoreFields();
 load();
-setInterval(saveFormData, 15000);
+traceSave();
+setInterval(saveFormData, 30000);

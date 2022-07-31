@@ -24,7 +24,7 @@
         <div class="flex items-baseline space-x-2">
           <label for="testTime">Ограничение по времени, минут</label>
           <input type="number" class="border-2 rounded-sm outline-none w-11" min="0" max="999"
-            name="time" id="testTime" />
+            name="time" id="testTime" value="0" />
           <button type="button" class="text-classicBlue-700 underline hover:text-classicBlue-200 hover:no-underline">
             Убрать
           </button>
@@ -113,10 +113,14 @@
 
             </ul>
           </div>
-          <div class="mt-2 flex flex-col ">
+          <div class="mt-2 flex flex-col space-y-2">
             <button type="button"
               class="p-1.5 rounded-full bg-classicBlue-300 text-classicPink-300 hover:bg-classicBlue-50 resetForm">
-              Начать заново
+              Начать заполнение заново
+            </button>
+            <button type="button" class="p-1.5 rounded-full bg-classicBlue-50 bg-opacity-60 text-classicPink-300"
+              id="saveForm" disabled>
+              Сохранить тест
             </button>
           </div>
         </div>

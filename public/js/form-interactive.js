@@ -41,6 +41,12 @@ function renderNavPanel() {
         anchor.className =
             "w-8 h-8 border-2 border-classicBlue-700 bg-classicBlue-200 hover:bg-classicBlue-700 text-classicPink-300 flex items-center justify-center";
         anchor.textContent = i;
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute("href")).scrollIntoView({
+                behavior: "smooth",
+            });
+        });
         li.append(anchor);
         container.append(li);
     }

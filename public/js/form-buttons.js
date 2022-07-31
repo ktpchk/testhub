@@ -16,6 +16,7 @@ class Question {
 
     static destroy(button) {
         let node = button.closest(".question");
+        if (Question.questions.length == 1) return;
         node.remove();
         Question.questions.forEach((item, index, array) => {
             if (item.node == node) {
@@ -77,7 +78,7 @@ class Answer {
 
         const answerTemplate = document.getElementById(question.type);
         let clone = answerTemplate.content.firstElementChild.cloneNode(true);
-        button.after(clone);
+        button.parentNode.append(clone);
 
         question.answers.push(this);
         this.question = question;
@@ -87,15 +88,17 @@ class Answer {
     static destroy(button) {
         let questionNode = button.closest(".question");
         let node = button.closest(".answer");
-        node.remove();
+        let question = Question.questions.find(
+            (item) => item.node == questionNode
+        );
 
-        Question.questions
-            .find((item) => item.node == questionNode)
-            .answers.forEach((item, index, array) => {
-                if (item.node == node) {
-                    array.splice(index, 1);
-                }
-            });
+        if (question.answers.length == 1) return;
+        node.remove();
+        question.answers.forEach((item, index, array) => {
+            if (item.node == node) {
+                array.splice(index, 1);
+            }
+        });
     }
 
     static fillMeta(questionNode) {
@@ -173,10 +176,25 @@ function selectType(event) {
     let question = Question.questions.find((item) => item.node == questionNode);
     question.type = target.value;
 
+    let oldAnswers = question.answers.slice();
     questionNode.querySelectorAll(".answer").forEach((item) => item.remove());
     question.answers.length = 0;
 
-    questionNode.querySelector(".answerAdder").click();
+    let textValues = [];
+    let answerCounter = 0;
+    for (let oldAnswer of oldAnswers) {
+        textValues.push(
+            oldAnswer.node.querySelector('[name*="[text]"]')?.value
+        );
+        questionNode.querySelector(".answerAdder").click();
+        answerCounter++;
+    }
+
+    let newAnswersNodes = questionNode.querySelectorAll(".answer");
+    for (let i = 0; i < answerCounter; i++) {
+        newAnswersNodes[i].querySelector('[name*="[text]"]').value =
+            textValues[i];
+    }
 }
 
 document.addEventListener("input", setPoints);
@@ -188,16 +206,6 @@ function setPoints(event) {
     let question = Question.questions.find((item) => item.node == questionNode);
     question.points = target.value;
 }
-
-document.addEventListener("click", function (event) {
-    let target = event.target.closest(".resetForm");
-    if (!target) return;
-
-    if (confirm("Это действие необратимо. Вы уверены?")) {
-        localStorage.clear();
-        location.reload();
-    }
-});
 
 if (localStorage.length == 0) {
     document.querySelector(".questionAdder").click();
