@@ -17,8 +17,13 @@
 
       <div class="flex justify-between text-sm mb-2">
         <div>
-          <button type="button" class="text-classicBlue-700 underline hover:text-classicBlue-200 hover:no-underline">
+          <button type="button" class="text-classicBlue-700 underline hover:text-classicBlue-200 hover:no-underline"
+            id="descriptionAdder">
             Добавить предисловие
+          </button>
+          <button hidden type="button"
+            class="text-classicBlue-700 underline hover:text-classicBlue-200 hover:no-underline" id="descriptionDelete">
+            Убрать предисловие
           </button>
         </div>
         <div class="flex items-baseline space-x-2">

@@ -252,6 +252,34 @@ function moveNode(node, direction) {
     Question.fillMeta();
 }
 
+document.addEventListener("click", function (e) {
+    let target = e.target.closest("#descriptionAdder,#descriptionDelete");
+    if (!target) return;
+
+    if (target.id == "descriptionAdder") {
+        let descriptionContainer = document.createElement("div");
+        descriptionContainer.id = "descriptionContainer";
+
+        let descriptionArea = document.createElement("textarea");
+        descriptionArea.value = localStorage.getItem("description");
+        descriptionArea.name = "description";
+        descriptionArea.className =
+            "w-full p-2 border-2 rounded-sm outline-none";
+        descriptionArea.rows = 4;
+        descriptionArea.placeholder = "Предисловие...";
+
+        descriptionContainer.append(descriptionArea);
+
+        target.parentNode.parentNode.after(descriptionContainer);
+        target.hidden = true;
+        document.getElementById("descriptionDelete").hidden = false;
+    } else if (target.id == "descriptionDelete") {
+        document.getElementById("descriptionContainer").remove();
+        target.hidden = true;
+        document.getElementById("descriptionAdder").hidden = false;
+    }
+});
+
 if (localStorage.length == 0) {
     document.querySelector(".questionAdder").click();
 }

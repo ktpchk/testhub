@@ -62,9 +62,7 @@
 
     <div>
       <ul class="space-y-4 flex flex-col">
-        {{-- <template id="multiVariant">
-          <x-multi-variant />
-        </template> --}}
+
         <button
           class="self-end hover:text-classicBlue-200 hover:underline text-classicBlue-900 cursor-pointer answerAdder"
           type="button">

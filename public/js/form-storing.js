@@ -52,6 +52,10 @@ function restoreFields() {
             question.node.querySelector(".answerAdder").click();
         }
     }
+
+    if (localStorage.getItem("description")) {
+        document.getElementById("descriptionAdder").click();
+    }
 }
 
 function load() {
@@ -109,7 +113,7 @@ document.addEventListener("click", function (event) {
 form.addEventListener("change", traceChange);
 document.addEventListener("click", function (e) {
     let target = e.target.closest(
-        ".questionAdder,.deleteQuestion,.answerAdder,.deleteAnswer,.moveUp,.moveDown"
+        ".questionAdder,.deleteQuestion,.answerAdder,.deleteAnswer,.moveUp,.moveDown,#descriptionAdder,#descriptionDelete"
     );
     if (!target) return;
     traceChange();
