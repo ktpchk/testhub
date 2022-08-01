@@ -3,9 +3,21 @@
     <div class="w-6 h-6 border-2 border-classicBlue-300 flex items-center justify-center">
       <span class="questionNumber">0</span>
     </div>
-    <div class="w-6 h-6 border-2 border-classicBlue-300 flex items-center justify-center cursor-pointer deleteQuestion">
+    <div
+      class="w-6 h-6 border-2 border-classicBlue-300 hover:bg-classicPink-700 flex items-center justify-center cursor-pointer deleteQuestion">
       <i class="fa-solid fa-trash-can"></i>
     </div>
+    <div>
+      <div
+        class="w-6 h-6 -mb-0.5 border-2 border-classicBlue-300 hover:bg-classicPink-700 flex items-center justify-center cursor-pointer moveUp">
+        <i class="fa-solid fa-angle-up"></i>
+      </div>
+      <div
+        class="w-6 h-6 -mb-0.5 border-2 border-classicBlue-300 hover:bg-classicPink-700 flex items-center justify-center cursor-pointer moveDown">
+        <i class="fa-solid fa-angle-down"></i>
+      </div>
+    </div>
+
   </div>
   <div class="w-full">
     <textarea class="w-full p-2 border-2 rounded-sm outline-none" rows="9" name="questions[][text]"></textarea>

@@ -109,7 +109,7 @@ document.addEventListener("click", function (event) {
 form.addEventListener("change", traceChange);
 document.addEventListener("click", function (e) {
     let target = e.target.closest(
-        ".questionAdder,.deleteQuestion,.answerAdder,.deleteAnswer"
+        ".questionAdder,.deleteQuestion,.answerAdder,.deleteAnswer,.moveUp,.moveDown"
     );
     if (!target) return;
     traceChange();

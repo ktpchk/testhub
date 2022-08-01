@@ -5,7 +5,7 @@ class Question {
         this.node = clone;
         this.answers = [];
         this.points = 0;
-        this.type = "";
+        this.type;
         Question.questions.push(this);
 
         button.before(clone);
@@ -30,9 +30,9 @@ class Question {
             let question = Question.questions[i];
             question.number = i;
 
-            let savedType = localStorage.getItem(
-                `questions[${question.number}][type]`
-            );
+            let savedType =
+                question.type ??
+                localStorage.getItem(`questions[${question.number}][type]`);
             question.type = savedType ?? "oneVariant";
 
             let savedPoints = localStorage.getItem(
@@ -57,12 +57,13 @@ class Question {
 
             questionNode
                 .querySelectorAll('[name$="[type]"]')
-                .forEach((item) =>
+                .forEach(function (item) {
                     item.setAttribute(
                         "name",
                         `questions[${question.number}][type]`
-                    )
-                );
+                    );
+                    if (item.value == question.type) item.checked = true;
+                });
         }
     }
 }
@@ -205,6 +206,50 @@ function setPoints(event) {
     let questionNode = target.closest(".question");
     let question = Question.questions.find((item) => item.node == questionNode);
     question.points = target.value;
+}
+
+document.addEventListener("click", function (e) {
+    let target = e.target.closest(".moveUp,.moveDown");
+    if (!target) return;
+    let questionNode = target.closest(".question");
+    if (target.classList.contains("moveUp")) {
+        moveNode(questionNode, "up");
+    } else if (target.classList.contains("moveDown")) {
+        moveNode(questionNode, "down");
+    }
+    questionNode.scrollIntoView({
+        behavior: "smooth",
+    });
+});
+function moveNode(node, direction) {
+    let questions = Question.questions;
+    let question = questions.find((item) => item.node == node);
+    let node2;
+    let tmp;
+    switch (direction) {
+        case "up":
+            if (question.number == 0) return;
+
+            node2 = node.previousElementSibling;
+            node2.before(node);
+
+            tmp = questions[question.number];
+            questions[question.number] = questions[question.number - 1];
+            questions[question.number - 1] = tmp;
+            break;
+
+        case "down":
+            if (question.number == questions.length - 1) return;
+
+            node2 = node.nextElementSibling;
+            node2.after(node);
+
+            tmp = questions[question.number];
+            questions[question.number] = questions[question.number + 1];
+            questions[question.number + 1] = tmp;
+            break;
+    }
+    Question.fillMeta();
 }
 
 if (localStorage.length == 0) {
