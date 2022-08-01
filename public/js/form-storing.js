@@ -115,7 +115,9 @@ document.addEventListener("click", function (event) {
 });
 form.addEventListener("change", traceChange);
 document.addEventListener("click", function (e) {
-    let target = e.target.closest("button:not(#saveForm,.resetForm)");
+    let target = e.target.closest(
+        "button:not(#saveForm,.resetForm,#submitForm)"
+    );
     if (!target) return;
     traceChange();
 });
@@ -128,7 +130,6 @@ form.addEventListener("submit", function (e) {
     e.preventDefault();
     saveFormData();
     window.onbeforeunload = null;
-    this.submit();
 });
 
 restoreFields();

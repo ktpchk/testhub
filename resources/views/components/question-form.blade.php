@@ -20,7 +20,8 @@
 
   </div>
   <div class="w-full">
-    <textarea class="w-full p-2 border-2 rounded-sm outline-none" rows="9" name="questions[][text]"></textarea>
+    <textarea class="w-full p-2 border-2 rounded-sm outline-none" rows="9" name="questions[][text]"
+      placeholder="Текст вопроса..."></textarea>
     <ul class="mb-3">
       <li class="my-2">
         <label class="flex justify-between">

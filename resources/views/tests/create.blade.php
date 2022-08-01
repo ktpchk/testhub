@@ -6,13 +6,13 @@
       <div class="mb-2">
         <label for="testName">Название</label>
         <input type="text" placeholder="Тест по арифметике" class="w-full border-2 rounded-sm outline-none p-0.5"
-          name="name" id="testName" required />
+          name="name" id="testName" />
       </div>
 
       <div class="mb-4">
         <label for="testTags">Теги</label>
         <input type="text" placeholder="математика, начальная школа, числа"
-          class="w-full border-2 rounded-sm outline-none p-0.5" name="tags" id="testTags" required />
+          class="w-full border-2 rounded-sm outline-none p-0.5" name="tags" id="testTags" />
       </div>
 
       <div class="flex justify-between text-sm mb-2">
@@ -75,7 +75,8 @@
       </div>
 
       <button type="submit"
-        class="p-2 w-1/2 rounded-full bg-classicBlue-300 text-2xl text-classicPink-300 hover:bg-classicBlue-50 self-center">
+        class="p-2 w-1/2 rounded-full bg-classicBlue-300 text-2xl text-classicPink-300 hover:bg-classicBlue-50 self-center"
+        id="submitForm">
         Отправить
       </button>
     </form>
@@ -136,6 +137,6 @@
     <script src="{{ asset('js/form-buttons.js') }}"></script>
     <script src="{{ asset('js/form-storing.js') }}"></script>
     <script src="{{ asset('js/form-interactive.js') }}"></script>
-
+    {{-- <script src="{{ asset('js/form-validation.js') }}"></script> --}}
   </x-slot>
 </x-layout>
