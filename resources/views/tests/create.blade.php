@@ -21,17 +21,15 @@
             id="descriptionAdder">
             Добавить предисловие
           </button>
-          <button hidden type="button"
-            class="text-classicBlue-700 underline hover:text-classicBlue-200 hover:no-underline" id="descriptionDelete">
-            Убрать предисловие
-          </button>
         </div>
         <div class="flex items-baseline space-x-2">
           <label for="testTime">Ограничение по времени, минут</label>
-          <input type="number" class="border-2 rounded-sm outline-none w-11" min="0" max="999"
-            name="time" id="testTime" value="0" />
-          <button type="button" class="text-classicBlue-700 underline hover:text-classicBlue-200 hover:no-underline">
-            Убрать
+          <div class="border-2 rounded-sm w-11 bg-gray-100 py-0.5 flex justify-center" id="testTimePlaceholder">
+            <i class="fa-solid fa-infinity"></i>
+          </div>
+          <button type="button" class="text-classicBlue-700 underline hover:text-classicBlue-200 hover:no-underline"
+            id="addTestTime">
+            Добавить
           </button>
         </div>
       </div>
@@ -107,7 +105,7 @@
             <li>Всего вопросов: <span id="totalQuestions" class="bg-classicBlue-400 text-classicPink-300 px-2">0</span>
             </li>
             <li>Всего баллов: <span id="totalPoints" class="bg-classicBlue-400 text-classicPink-300 px-2">0</span></li>
-            <li>Минут на вопрос: <span id="timePerQuestion"
+            <li hidden>Минут на вопрос: <span id="timePerQuestion"
                 class="bg-classicBlue-400 text-classicPink-300 px-2">0</span>
             </li>
           </ul>

@@ -261,22 +261,69 @@ document.addEventListener("click", function (e) {
         descriptionContainer.id = "descriptionContainer";
 
         let descriptionArea = document.createElement("textarea");
-        descriptionArea.value = localStorage.getItem("description");
+        descriptionArea.value =
+            window.description ?? localStorage.getItem("description");
         descriptionArea.name = "description";
         descriptionArea.className =
             "w-full p-2 border-2 rounded-sm outline-none";
         descriptionArea.rows = 4;
         descriptionArea.placeholder = "Предисловие...";
 
+        descriptionArea.addEventListener("input", function (e) {
+            window.description = this.value;
+        });
+
         descriptionContainer.append(descriptionArea);
 
         target.parentNode.parentNode.after(descriptionContainer);
-        target.hidden = true;
-        document.getElementById("descriptionDelete").hidden = false;
+        target.textContent = "Убрать предисловие";
+        target.id = "descriptionDelete";
     } else if (target.id == "descriptionDelete") {
         document.getElementById("descriptionContainer").remove();
-        target.hidden = true;
-        document.getElementById("descriptionAdder").hidden = false;
+        target.textContent = "Добавить предисловие";
+        target.id = "descriptionAdder";
+    }
+});
+
+document.addEventListener("click", function (e) {
+    let target = e.target.closest("#deleteTestTime,#addTestTime");
+    if (!target) return;
+
+    if (target.id == "deleteTestTime") {
+        let testTime = document.getElementById("testTime");
+        let div = document.createElement("div");
+        div.innerHTML = '<i class="fa-solid fa-infinity"></i>';
+        div.className =
+            "border-2 rounded-sm w-11 bg-gray-100 py-0.5 flex justify-center";
+        div.id = "testTimePlaceholder";
+
+        testTime.replaceWith(div);
+
+        target.textContent = "Добавить";
+        target.id = "addTestTime";
+    } else if (target.id == "addTestTime") {
+        let testTimePlaceholder = document.getElementById(
+            "testTimePlaceholder"
+        );
+
+        let input = document.createElement("input");
+        input.type = "number";
+        input.className = "border-2 rounded-sm outline-none w-11";
+        input.min = 0;
+        input.max = 999;
+        input.name = "time";
+        input.id = "testTime";
+        input.value = window.testTime ?? +localStorage.getItem("time") ?? 0;
+
+        input.addEventListener("input", function (e) {
+            window.testTime = this.value;
+        });
+
+        window.testTime = input.value;
+        testTimePlaceholder.replaceWith(input);
+
+        target.textContent = "Убрать";
+        target.id = "deleteTestTime";
     }
 });
 

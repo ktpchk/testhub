@@ -1,11 +1,12 @@
 const totalQuestions = document.getElementById("totalQuestions");
 const totalPoints = document.getElementById("totalPoints");
 const timePerQuestion = document.getElementById("timePerQuestion");
-const testTime = document.getElementById("testTime");
 const navPanel = document.getElementById("navPanel");
 
 document.addEventListener("click", function (event) {
-    let target = event.target.closest(".questionAdder,.deleteQuestion");
+    let target = event.target.closest(
+        ".questionAdder,.deleteQuestion,#addTestTime,#deleteTestTime"
+    );
     if (!target) return;
     render();
 });
@@ -16,7 +17,13 @@ function render() {
     totalPoints.textContent =
         Question.questions.reduce((sum, item) => sum + +item.points, 0) ?? 0;
     timePerQuestion.textContent =
-        Math.round(testTime.value / Question.questions.length) ?? 0;
+        Math.round(window.testTime / Question.questions.length) ?? 0;
+    // console.log(window.testTime);
+
+    timePerQuestion.parentNode.hidden = document.getElementById("testTime")
+        ? false
+        : true;
+
     renderNavPanel();
 }
 
@@ -25,10 +32,6 @@ document.addEventListener("input", function (event) {
     if (!target) return;
     render();
 });
-
-window.onload = function () {
-    render();
-};
 
 function renderNavPanel() {
     let container = navPanel.querySelector(".navContainer");
@@ -51,6 +54,8 @@ function renderNavPanel() {
         container.append(li);
     }
 }
+
+render();
 
 // Sticky Right Panel
 

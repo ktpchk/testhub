@@ -56,6 +56,9 @@ function restoreFields() {
     if (localStorage.getItem("description")) {
         document.getElementById("descriptionAdder").click();
     }
+    if (localStorage.getItem("time")) {
+        document.getElementById("addTestTime").click();
+    }
 }
 
 function load() {
@@ -112,9 +115,7 @@ document.addEventListener("click", function (event) {
 });
 form.addEventListener("change", traceChange);
 document.addEventListener("click", function (e) {
-    let target = e.target.closest(
-        ".questionAdder,.deleteQuestion,.answerAdder,.deleteAnswer,.moveUp,.moveDown,#descriptionAdder,#descriptionDelete"
-    );
+    let target = e.target.closest("button:not(#saveForm,.resetForm)");
     if (!target) return;
     traceChange();
 });
