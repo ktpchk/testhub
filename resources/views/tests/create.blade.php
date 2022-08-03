@@ -1,18 +1,25 @@
 <x-layout>
   <x-slot name="title">Создать новый тест</x-slot>
   <x-slot name="left">
+    {{-- {{ print_r($errors->all()) }} --}}
     <form action="/tests/store" method="POST" class="flex flex-col" name="test">
       @csrf
       <div class="mb-2">
         <label for="testName">Название</label>
         <input type="text" placeholder="Тест по арифметике" class="w-full border-2 rounded-sm outline-none p-0.5"
           name="name" id="testName" />
+        @error('name')
+          <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+        @enderror
       </div>
 
       <div class="mb-4">
         <label for="testTags">Теги</label>
         <input type="text" placeholder="математика, начальная школа, числа"
           class="w-full border-2 rounded-sm outline-none p-0.5" name="tags" id="testTags" />
+        @error('tags')
+          <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+        @enderror
       </div>
 
       <div class="flex justify-between text-sm mb-2">
@@ -137,6 +144,6 @@
     <script src="{{ asset('js/form-buttons.js') }}"></script>
     <script src="{{ asset('js/form-storing.js') }}"></script>
     <script src="{{ asset('js/form-interactive.js') }}"></script>
-    {{-- <script src="{{ asset('js/form-validation.js') }}"></script> --}}
+    <script src="{{ asset('js/form-validation.js') }}"></script>
   </x-slot>
 </x-layout>

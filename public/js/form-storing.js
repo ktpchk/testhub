@@ -1,5 +1,5 @@
-const form = document.forms.test;
-let elements = form.elements;
+window.form = document.forms.test;
+let elements = window.form.elements;
 let saveFormButton = document.getElementById("saveForm");
 
 function saveFormData() {
@@ -113,7 +113,7 @@ document.addEventListener("click", function (event) {
         traceSave();
     }
 });
-form.addEventListener("change", traceChange);
+window.form.addEventListener("change", traceChange);
 document.addEventListener("click", function (e) {
     let target = e.target.closest(
         "button:not(#saveForm,.resetForm,#submitForm)"
@@ -126,7 +126,7 @@ window.onbeforeunload = function (e) {
     e.preventDefault();
     e.returnValue = "";
 };
-form.addEventListener("submit", function (e) {
+window.form.addEventListener("submit", function (e) {
     e.preventDefault();
     saveFormData();
     window.onbeforeunload = null;
