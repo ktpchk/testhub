@@ -3,39 +3,38 @@
     <div class="w-6 h-6 border-2 border-classicBlue-300 flex items-center justify-center">
       <span class="questionNumber">0</span>
     </div>
-    <div
+    <button type="button"
       class="w-6 h-6 border-2 border-classicBlue-300 hover:bg-classicPink-700 flex items-center justify-center cursor-pointer deleteQuestion">
       <i class="fa-solid fa-trash-can"></i>
-    </div>
+    </button>
     <div>
-      <div
-        class="w-6 h-6 -mb-0.5 border-2 border-classicBlue-300 hover:bg-classicPink-700 flex items-center justify-center cursor-pointer moveUp">
+      <button type="button"
+        class="w-6 h-6 -mb-0.5 border-2 border-classicBlue-300 hover:bg-classicPink-700 flex items-center justify-center moveUp">
         <i class="fa-solid fa-angle-up"></i>
-      </div>
-      <div
-        class="w-6 h-6 -mb-0.5 border-2 border-classicBlue-300 hover:bg-classicPink-700 flex items-center justify-center cursor-pointer moveDown">
+      </button>
+      <button type="button"
+        class="w-6 h-6 -mb-0.5 border-2 border-classicBlue-300 hover:bg-classicPink-700 flex items-center justify-center moveDown">
         <i class="fa-solid fa-angle-down"></i>
-      </div>
+      </button>
     </div>
 
   </div>
   <div class="w-full">
-    <textarea class="w-full p-2 border-2 rounded-sm outline-none" rows="9" name="questions[][text]"
-      placeholder="Текст вопроса..."></textarea>
+    <div class="errorContainer mb-4">
+      <textarea class="w-full p-2 border-2 rounded-sm outline-none" rows="9" name="questions[][text]"
+        placeholder="Текст вопроса..."></textarea>
+    </div>
 
-    @error('questions.*.text')
-      <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-    @enderror
 
     <ul class="mb-3">
-      <li class="my-2">
+      <li class="my-2 errorContainer">
         <label class="flex justify-between">
           Число баллов:
           <input type="number" min="0" max="99" class="border-2 rounded-sm outline-none w-12"
             value="0" name="questions[][points]" />
         </label>
       </li>
-      <li>
+      <li class="errorContainer">
         <div class="flex justify-between">
           Тип ответа:
           <div class="space-x-2">
@@ -67,7 +66,7 @@
     </ul>
 
     <div>
-      <ul class="space-y-4 flex flex-col">
+      <ul class="space-y-4 flex flex-col errorContainer">
 
         <button
           class="self-end hover:text-classicBlue-200 hover:underline text-classicBlue-900 cursor-pointer answerAdder"

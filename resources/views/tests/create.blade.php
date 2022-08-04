@@ -1,48 +1,48 @@
 <x-layout>
   <x-slot name="title">Создать новый тест</x-slot>
   <x-slot name="left">
-    {{-- {{ print_r($errors->all()) }} --}}
     <form action="/tests/store" method="POST" class="flex flex-col" name="test">
       @csrf
-      <div class="mb-2">
+      <div class="mb-3 errorContainer">
         <label for="testName">Название</label>
         <input type="text" placeholder="Тест по арифметике" class="w-full border-2 rounded-sm outline-none p-0.5"
           name="name" id="testName" />
-        @error('name')
-          <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-        @enderror
       </div>
 
-      <div class="mb-4">
+      <div class="mb-4 errorContainer">
         <label for="testTags">Теги</label>
         <input type="text" placeholder="математика, начальная школа, числа"
           class="w-full border-2 rounded-sm outline-none p-0.5" name="tags" id="testTags" />
-        @error('tags')
-          <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-        @enderror
       </div>
 
-      <div class="flex justify-between text-sm mb-2">
-        <div>
-          <button type="button" class="text-classicBlue-700 underline hover:text-classicBlue-200 hover:no-underline"
-            id="descriptionAdder">
-            Добавить предисловие
-          </button>
-        </div>
-        <div class="flex items-baseline space-x-2">
-          <label for="testTime">Ограничение по времени, минут</label>
-          <div class="border-2 rounded-sm w-11 bg-gray-100 py-0.5 flex justify-center" id="testTimePlaceholder">
-            <i class="fa-solid fa-infinity"></i>
+      <div class="errorContainer">
+        <div class="flex justify-between text-sm mb-2">
+          <div>
+            <button type="button" class="text-classicBlue-700 underline hover:text-classicBlue-200 hover:no-underline"
+              id="descriptionAdder">
+              Добавить предисловие
+            </button>
           </div>
-          <button type="button" class="text-classicBlue-700 underline hover:text-classicBlue-200 hover:no-underline"
-            id="addTestTime">
-            Добавить
-          </button>
+          <div class="errorContainer">
+            <div class="flex items-baseline space-x-2">
+              <label for="testTime">Ограничение по времени, минут</label>
+              <div class="border-2 rounded-sm w-11 bg-gray-100 py-0.5 flex justify-center" id="testTimePlaceholder">
+                <i class="fa-solid fa-infinity"></i>
+              </div>
+              <button type="button"
+                class="text-classicBlue-700 underline hover:text-classicBlue-200 hover:no-underline" id="addTestTime">
+                Добавить
+              </button>
+            </div>
+          </div>
+
         </div>
       </div>
+
+
 
       <div class="mb-10">
-        <ul>
+        <ul class="errorContainer">
           <li>
             <label>
               <input type="checkbox" name="options[]" value="detailedResults" />

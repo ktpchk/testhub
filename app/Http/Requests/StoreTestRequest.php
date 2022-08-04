@@ -32,7 +32,7 @@ class StoreTestRequest extends FormRequest
             'tags' => 'nullable|string|max:255', // Check
             'time' => 'numeric|min:0|max:999', // Check
             'description' => 'nullable|string|max:1500', // Check
-            'options' => 'array|in:detailedResults,publicResults|max:2', // Check
+            'options' => 'array|in:detailedResults,publicResults', // Check
             'questions' => 'required|array', // Check
         ];
 
