@@ -28,37 +28,43 @@ class StoreTestRequest extends FormRequest
     {
         // dd($this->request->all());
         $rules =  [
-            'name' => 'required|string|max:255',
-            'tags' => 'nullable|string|max:255',
-            'time' => 'numeric|min:0|max:999',
-            'description' => 'nullable|string|max:1500',
-            'options' => 'array|in:detailedResults,publicResults|max:2',
-            'questions' => 'required|array',
+            'name' => 'required|string|max:255', // Check
+            'tags' => 'nullable|string|max:255', // Check
+            'time' => 'numeric|min:0|max:999', // Check
+            'description' => 'nullable|string|max:1500', // Check
+            'options' => 'array|in:detailedResults,publicResults|max:2', // Check
+            'questions' => 'required|array', // Check
         ];
 
         $request = $this->request->all();
+        if (!array_key_exists('questions', $request)) {
+            return ($rules);
+        }
         foreach ($request['questions'] as $questionKey => $questionVal) {
             if ($questionKey === array_key_first($request['questions'])) {
-                $rules['questions.' . $questionKey] = 'required|array';
+                $rules['questions.' . $questionKey] = 'required|array'; // Check
             }
-            $rules['questions.' . $questionKey . '.text'] = 'required|string|max:1500';
-            $rules['questions.' . $questionKey . '.points'] = 'required|numeric|min:0|max:99';
-            $rules['questions.' . $questionKey . '.type'] = 'required|string|in:oneVariant,multiVariant,text';
+            $rules['questions.' . $questionKey . '.text'] = 'required|string|max:1500'; // Check
+            $rules['questions.' . $questionKey . '.points'] = 'required|numeric|min:0|max:99'; // Check
+            $rules['questions.' . $questionKey . '.type'] = 'required|string|in:oneVariant,multiVariant,text'; // Check
             $rules['questions.' . $questionKey . '.answers'] = 'required|array';
 
 
             if ($questionVal['type'] == 'oneVariant') {
                 $rules['questions.' . $questionKey . '.correct'] = 'required|numeric|min:0';
             } elseif ($questionVal['type'] == 'multiVariant') {
-                $rules['questions.' . $questionKey . '.correct'] = 'required|array';
+                $rules['questions.' . $questionKey . '.correct'] = 'required|array|min:1';
                 $rules['questions.' . $questionKey . '.correct.*'] = 'numeric|min:0';
-            }
+            } // Check
 
+            if (!array_key_exists('answers', $questionVal)) {
+                return ($rules);
+            }
             foreach ($questionVal['answers'] as $answerKey => $answerVal) {
                 if ($answerKey === array_key_first($questionVal['answers'])) {
-                    $rules['questions.' . $questionKey . '.answers.' . $answerKey] = 'required|array';
+                    $rules['questions.' . $questionKey . '.answers.' . $answerKey] = 'required|array'; // Check
                 }
-                $rules['questions.' . $questionKey . '.answers.' . $answerKey . '.text'] = 'required|string|max:255';
+                $rules['questions.' . $questionKey . '.answers.' . $answerKey . '.text'] = 'required|string|max:255'; //Check
             }
         }
         // dd($rules);
