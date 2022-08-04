@@ -31,6 +31,7 @@ class TestController extends Controller
 
     public function store(StoreTestRequest $request)
     {
+        dd($request->validated());
         // return response()->json()
     }
 }
