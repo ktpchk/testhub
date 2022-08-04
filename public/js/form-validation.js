@@ -9,24 +9,32 @@ window.form.addEventListener("submit", async function (e) {
     });
     let result = await response.json();
 
-    console.log(result);
     for (let key in result) {
         let error = result[key];
         if (!this.elements[key]) key += "[]";
-        console.log(
-            key,
-            error,
-            this.elements[key],
-            this.elements[key].parentNode
-        );
+        let element = this.elements[key];
 
         let errorDiv = document.createElement("div");
         errorDiv.className = "text-red-500 text-xs mt-1 errorDiv";
         errorDiv.textContent = error;
-        if (!this.elements[key].length) {
-            this.elements[key].closest(".errorContainer").append(errorDiv);
+        if (!element.length) {
+            element.closest(".errorContainer").append(errorDiv);
         } else {
-            this.elements[key][0].closest(".errorContainer").append(errorDiv);
+            element[0].closest(".errorContainer").append(errorDiv);
+        }
+
+        if (element.type == "text" || element.type == "textarea") {
+            this.elements[key].addEventListener("input", removeErrorDiv);
+        } else {
+            this.elements[key].addEventListener("change", removeErrorDiv);
+        }
+
+        function removeErrorDiv(e) {
+            let errorDiv = Array.from(
+                e.currentTarget.closest(".errorContainer").children
+            )
+                .find((item) => item.classList.contains("errorDiv"))
+                ?.remove();
         }
     }
 });
