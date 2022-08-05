@@ -11,9 +11,11 @@ class Test extends Model
 
     protected $fillable = [
         'name',
+        'tags',
+        'description',
+        'time',
         'tried',
         'passed',
-        'tags',
     ];
 
     public function scopeFilter($query, $search)
@@ -22,5 +24,15 @@ class Test extends Model
             $query->where('name', 'REGEXP', '[\\b\\s]' . $search . '[\\s\\b]')
                 ->orWhere('tags', 'REGEXP', '[\\b\\s]' . $search . '[,\\b]');
         }
+    }
+
+    public function questions()
+    {
+        return $this->hasMany(TestQuestion::class, 'test_id');
+    }
+
+    public function option()
+    {
+        return $this->hasOne(TestOption::class, 'test_id');
     }
 }

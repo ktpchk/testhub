@@ -16,9 +16,11 @@ class CreateTestsTable extends Migration
         Schema::create('tests', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('tried')->unsigned();
-            $table->integer('passed')->unsigned();
-            $table->string('tags');
+            $table->string('tags')->nullable();
+            $table->text('description')->nullable();
+            $table->integer('time')->default(0);
+            $table->integer('tried')->default(0)->unsigned();
+            $table->integer('passed')->default(0)->unsigned();
             $table->timestamps();
         });
     }

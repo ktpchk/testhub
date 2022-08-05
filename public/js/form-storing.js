@@ -130,6 +130,7 @@ window.form.addEventListener("submit", function (e) {
     e.preventDefault();
     saveFormData();
     window.onbeforeunload = null;
+    traceSave();
 });
 
 restoreFields();
