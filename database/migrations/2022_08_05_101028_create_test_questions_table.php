@@ -16,7 +16,7 @@ class CreateTestQuestionsTable extends Migration
         Schema::create('test_questions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('test_id')->constrained()->onDelete('cascade');
-            $table->integer('number')->unsigned()->unique();
+            // $table->integer('number')->unsigned()->unique();
             $table->text('text');
             $table->enum('type', ['oneVariant', 'multiVariant', 'text']);
             $table->integer('points')->default(0)->unsigned();

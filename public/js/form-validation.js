@@ -7,32 +7,33 @@ window.form.addEventListener("submit", async function (e) {
         method: "POST",
         body: formData,
     });
-    let result = await response.json();
-
     console.log(response);
     if (response.ok) {
+        let result = await response.json();
         console.log(result);
     } else if (response.status == 422) {
+        let result = await response.json();
+
         for (let key in result) {
             let error = result[key];
             if (!this.elements[key]) key += "[]";
             let element = this.elements[key];
+            if (element.length) element = element[0];
 
             let errorDiv = document.createElement("div");
             errorDiv.className = "text-red-500 text-xs mt-1 errorDiv";
             errorDiv.textContent = error;
-            if (!element.length) {
-                element.closest(".errorContainer").append(errorDiv);
-            } else {
-                element[0].closest(".errorContainer").append(errorDiv);
-            }
+
+            element.closest(".errorContainer").append(errorDiv);
 
             let event =
                 element.type == "text" || element.type == "textarea"
                     ? "input"
                     : "change";
 
-            this.elements[key].addEventListener(event, removeErrorDiv);
+            console.log(result);
+            console.log(key, error, element);
+            element.addEventListener(event, removeErrorDiv);
 
             function removeErrorDiv(e) {
                 let errorDiv = Array.from(
@@ -42,5 +43,8 @@ window.form.addEventListener("submit", async function (e) {
                     ?.remove();
             }
         }
+    } else if (response.status == 500) {
+        let result = await response.text();
+        console.log(result);
     }
 });

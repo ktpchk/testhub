@@ -11,7 +11,7 @@ class TestQuestion extends Model
 
     protected $fillable = [
         'test_id',
-        'number',
+        // 'number',
         'text',
         'type',
         'points'

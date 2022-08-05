@@ -250,6 +250,7 @@ function moveNode(node, direction) {
             break;
     }
     Question.fillMeta();
+    Question.questions.forEach((item) => Answer.fillMeta(item.node));
 }
 
 document.addEventListener("click", function (e) {

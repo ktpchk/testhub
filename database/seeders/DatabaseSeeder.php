@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
 
         $testQuestion = TestQuestion::factory()->create([
             'test_id' => $test->id,
-            'number' => 1
+            // 'number' => 1
         ]);
 
         QuestionAnswer::factory()->create([
