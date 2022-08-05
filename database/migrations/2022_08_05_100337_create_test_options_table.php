@@ -16,8 +16,9 @@ class CreateTestOptionsTable extends Migration
         Schema::create('test_options', function (Blueprint $table) {
             $table->id();
             $table->foreignId('test_id')->constrained()->onDelete('cascade');
-            $table->boolean('detailed_results')->nullable();
-            $table->boolean('public_results')->nullable();
+            $table->boolean('detailed_results');
+            $table->boolean('public_results');
+            $table->timestamps();
         });
     }
 

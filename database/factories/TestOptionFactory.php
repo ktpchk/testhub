@@ -14,8 +14,8 @@ class TestOptionFactory extends Factory
     public function definition()
     {
         return [
-            'detailed_results' => $this->faker->randomElement([true, false, null]),
-            'public_results' => $this->faker->randomElement([true, false, null]),
+            'detailed_results' => $this->faker->randomElement([true, false]),
+            'public_results' => $this->faker->randomElement([true, false]),
         ];
     }
 }
