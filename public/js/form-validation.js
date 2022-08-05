@@ -23,11 +23,12 @@ window.form.addEventListener("submit", async function (e) {
             element[0].closest(".errorContainer").append(errorDiv);
         }
 
-        if (element.type == "text" || element.type == "textarea") {
-            this.elements[key].addEventListener("input", removeErrorDiv);
-        } else {
-            this.elements[key].addEventListener("change", removeErrorDiv);
-        }
+        let event =
+            element.type == "text" || element.type == "textarea"
+                ? "input"
+                : "change";
+
+        this.elements[key].addEventListener(event, removeErrorDiv);
 
         function removeErrorDiv(e) {
             let errorDiv = Array.from(
