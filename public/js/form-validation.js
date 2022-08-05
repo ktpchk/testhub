@@ -7,10 +7,11 @@ window.form.addEventListener("submit", async function (e) {
         method: "POST",
         body: formData,
     });
-    console.log(response);
     if (response.ok) {
-        let result = await response.json();
-        console.log(result);
+        document.body.style.pointerEvents = "none";
+        showFlash("Тест успешно загружен на сервер!", true);
+        localStorage.clear();
+        setTimeout(() => (location.href = "/"), 1000);
     } else if (response.status == 422) {
         let result = await response.json();
 
@@ -30,21 +31,40 @@ window.form.addEventListener("submit", async function (e) {
                 element.type == "text" || element.type == "textarea"
                     ? "input"
                     : "change";
-
-            console.log(result);
-            console.log(key, error, element);
             element.addEventListener(event, removeErrorDiv);
-
-            function removeErrorDiv(e) {
-                let errorDiv = Array.from(
-                    e.currentTarget.closest(".errorContainer").children
-                )
-                    .find((item) => item.classList.contains("errorDiv"))
-                    ?.remove();
-            }
         }
-    } else if (response.status == 500) {
-        let result = await response.text();
-        console.log(result);
+
+        this.querySelectorAll(".answerAdder").forEach((item) =>
+            item.addEventListener("click", function (e) {
+                removeErrorDiv(e);
+            })
+        );
+        function removeErrorDiv(e) {
+            let errorDiv = Array.from(
+                e.currentTarget.closest(".errorContainer").children
+            )
+                .find((item) => item.classList.contains("errorDiv"))
+                ?.remove();
+        }
+    } else if (response.status == 502) {
+        let message = await response.text();
+        showFlash(message.trim(), false);
+    }
+
+    function showFlash(message, ok = true) {
+        let flash = document.getElementById("flashMessage");
+        flash.textContent = message;
+        if (ok) {
+            flash.classList.add("bg-green-500");
+            flash.classList.remove("bg-red-500");
+        } else {
+            flash.classList.remove("bg-green-500");
+            flash.classList.add("bg-red-500");
+        }
+        flash.hidden = false;
+        setTimeout(() => {
+            flash.hidden = true;
+            flash.innerHTML = "";
+        }, 1500);
     }
 });

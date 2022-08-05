@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTestRequest;
 use App\Models\Test;
+use Exception;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -33,37 +35,44 @@ class TestController extends Controller
     public function store(StoreTestRequest $request)
     {
         $inputData = $request->validated();
-        DB::transaction(function () use ($inputData) {
-            $testData = [
-                'name' => $inputData['name'],
-                'tags' => $inputData['tags'],
-                'description' => $inputData['description'] ?? null,
-                'time' => $inputData['time'] ?? 0,
-            ];
-
-            $testOptionData =
-                [
-                    'detailed_results' => ($inputData['options'] ?? false) && in_array('detailedResults', $inputData['options']),
-                    'public_results' => ($inputData['options'] ?? false) && in_array('publicResults', $inputData['options']),
+        try {
+            DB::transaction(function () use ($inputData) {
+                $testData = [
+                    'name' => $inputData['name'],
+                    'tags' => $inputData['tags'],
+                    'description' => $inputData['description'] ?? null,
+                    'time' => $inputData['time'] ?? 0,
                 ];
 
-            $test = Test::create($testData);
-            $test->option()->create($testOptionData);
+                $testOptionData =
+                    [
+                        'detailed_results' => ($inputData['options'] ?? false) && in_array('detailedResults', $inputData['options']),
+                        'public_results' => ($inputData['options'] ?? false) && in_array('publicResults', $inputData['options']),
+                    ];
 
-            foreach ($inputData['questions'] as $questionKey => $questionVal) {
-                $question = $test->questions()->create($questionVal);
+                $test = Test::create($testData);
+                $test->option()->create($testOptionData);
 
-                $answers = $questionVal['answers'];
-                $correctAnswers = $questionVal['correct'];
-                if (!is_array($correctAnswers)) $correctAnswers = [$correctAnswers];
-                foreach ($answers as $answerKey => $answerVal) {
-                    $answers[$answerKey]['correct'] = in_array($answerKey, $correctAnswers);
+                foreach ($inputData['questions'] as $questionKey => $questionVal) {
+                    $question = $test->questions()->create($questionVal);
+                    $answersData = $questionVal['answers'];
+
+                    if (array_key_exists('correct', $questionVal)) {
+                        $correctAnswers = $questionVal['correct'];
+                        if (!is_array($correctAnswers)) $correctAnswers = [$correctAnswers];
+                        foreach ($answersData as $answerKey => $answerVal) {
+                            $answersData[$answerKey]['correct'] = in_array($answerKey, $correctAnswers);
+                        }
+                    }
+
+                    $question->answers()->createMany($answersData);
                 }
-                $question->answers()->createMany($answers);
-            }
-        }, 5);
-
-        return response()->json([], 200);
-        // return response()->json()
+            }, 5);
+        } catch (Exception $e) {
+            throw new HttpResponseException(
+                response('При сохранении данных на сервер возникла ошибка. Попробуйте снова через какое-то время', 502)
+            );
+        }
+        return response()->json();
     }
 }

@@ -3,7 +3,9 @@
     <a href="" class="text-classicBlue-900 hover:text-classicBlue-100">
       {{ $test->name }}
     </a>
-    <x-taglist :test=$test />
+    @if ($test->tags)
+      <x-taglist :test=$test />
+    @endif
   </td>
   <td class="pt-2 text-center text-sm">
     {{ $test->passed }} / {{ $test->tried }}

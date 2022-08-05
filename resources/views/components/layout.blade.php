@@ -66,6 +66,7 @@
     </footer>
   </div>
   {{ $scripts ?? '' }}
+  <x-flash-message />
 </body>
 
 </html>

@@ -62,16 +62,16 @@
       <div class="flex flex-col mb-4">
         <h3 class="text-4xl my-4 text-center">Вопросы теста</h3>
         <template id="questionTemplate">
-          <x-question-form />
+          <x-form.question-form />
         </template>
         <template id="oneVariant">
-          <x-one-variant />
+          <x-form.one-variant />
         </template>
         <template id="multiVariant">
-          <x-multi-variant />
+          <x-form.multi-variant />
         </template>
         <template id="text">
-          <x-text />
+          <x-form.text />
         </template>
 
 
