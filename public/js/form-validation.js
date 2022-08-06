@@ -3,15 +3,16 @@ window.form.addEventListener("submit", async function (e) {
     this.querySelectorAll(".errorDiv").forEach((div) => div.remove());
 
     let formData = new FormData(this);
-    let response = await fetch("/tests/store", {
+    let response = await fetch("/tests", {
         method: "POST",
         body: formData,
     });
     if (response.ok) {
+        let test = await response.json();
         document.body.style.pointerEvents = "none";
         showFlash("Тест успешно загружен на сервер!", true);
         localStorage.clear();
-        setTimeout(() => (location.href = "/"), 1000);
+        setTimeout(() => (location.href = `/tests/${test.id}/publish`), 1000);
     } else if (response.status == 422) {
         let result = await response.json();
 

@@ -18,11 +18,15 @@ class Test extends Model
         'passed',
     ];
 
-    public function scopeFilter($query, $search)
+    public function scopeFilter($query, $search, $tag)
     {
-        if ($search ?? false) {
-            $query->where('name', 'REGEXP', '[\\b\\s]' . $search . '[\\s\\b]')
-                ->orWhere('tags', 'REGEXP', '[\\b\\s]' . $search . '[,\\b]');
+        if ($search) {
+            $query
+                ->where('name', 'REGEXP', '\\b' . $search . '\\b')
+                ->orWhere('tags', 'REGEXP', '\\b' . $search . '\\b');
+        } elseif ($tag) {
+            $query
+                ->where('tags', 'REGEXP', '\\b' . $tag . '\\b');
         }
     }
 

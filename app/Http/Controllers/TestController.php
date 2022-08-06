@@ -21,8 +21,9 @@ class TestController extends Controller
     public function index(Request $request)
     {
         $searchValue = $request->search;
+        $tagValue = $request->tag;
         return view('tests.index', [
-            'tests' => Test::latest()->filter($searchValue)->paginate(10),
+            'tests' => Test::latest()->filter($searchValue, $tagValue)->paginate(10),
             'searchValue' => $searchValue
         ]);
     }
@@ -36,7 +37,7 @@ class TestController extends Controller
     {
         $inputData = $request->validated();
         try {
-            DB::transaction(function () use ($inputData) {
+            $test = DB::transaction(function () use ($inputData) {
                 $testData = [
                     'name' => $inputData['name'],
                     'tags' => $inputData['tags'],
@@ -53,8 +54,10 @@ class TestController extends Controller
                 $test = Test::create($testData);
                 $test->option()->create($testOptionData);
 
+
                 foreach ($inputData['questions'] as $questionKey => $questionVal) {
                     $question = $test->questions()->create($questionVal);
+
                     $answersData = $questionVal['answers'];
 
                     if (array_key_exists('correct', $questionVal)) {
@@ -67,12 +70,40 @@ class TestController extends Controller
 
                     $question->answers()->createMany($answersData);
                 }
+                return $test;
             }, 5);
+
+            return response()->json($test);
         } catch (Exception $e) {
             throw new HttpResponseException(
                 response('При сохранении данных на сервер возникла ошибка. Попробуйте снова через какое-то время', 502)
             );
         }
-        return response()->json();
+    }
+
+    public function publish(Test $test)
+    {
+        return view('tests.publish', [
+            'test' => $test
+        ]);
+    }
+
+    public function show(Test $test)
+    {
+        return view('tests.show', [
+            'test' => $test
+        ]);
+    }
+
+    public function question(Test $test)
+    {
+        return view('tests.question', [
+            'test' => $test
+        ]);
+    }
+
+    public function review(Request $request)
+    {
+        dd($request->all());
     }
 }

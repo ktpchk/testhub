@@ -47,12 +47,12 @@
     <main class="flex-auto bg-classicPink-400">
       <div class="container mx-auto">
         <h2 class="text-4xl mt-6">{{ $title ?? '' }}</h2>
-        <div class="flex my-6">
-          <div class="w-3/5">
-            {{ $left }}
+        <div class="flex my-4">
+          <div class="w-3/5 mb-6">
+            {{ $left ?? '' }}
           </div>
           <div class="w-1/3 space-y-6 mr-0 ml-auto text-sm">
-            {{ $right }}
+            {{ $right ?? '' }}
           </div>
         </div>
       </div>
@@ -65,8 +65,8 @@
       </div>
     </footer>
   </div>
-  {{ $scripts ?? '' }}
   <x-flash-message />
+  {{ $scripts ?? '' }}
 </body>
 
 </html>

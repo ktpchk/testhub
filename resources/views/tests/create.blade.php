@@ -1,7 +1,7 @@
 <x-layout>
   <x-slot name="title">Создать новый тест</x-slot>
   <x-slot name="left">
-    <form action="/tests/store" method="POST" class="flex flex-col" name="test">
+    <form action="/tests" method="POST" class="flex flex-col" name="test">
       @csrf
       <div class="mb-3 errorContainer">
         <label for="testName">Название</label>

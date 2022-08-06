@@ -31,7 +31,7 @@
         <label class="flex justify-between">
           Число баллов:
           <input type="number" min="0" max="99" class="border-2 rounded-sm outline-none w-12"
-            value="0" name="questions[][points]" />
+            value="5" name="questions[][points]" />
         </label>
       </li>
       <li class="errorContainer">
