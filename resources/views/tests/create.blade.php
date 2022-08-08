@@ -141,9 +141,9 @@
   <x-slot name="scripts">
     <script src="{{ asset('js/ResizeSensor.js') }}"></script>
     <script src="{{ asset('js/sticky-sidebar.js') }}"></script>
-    <script src="{{ asset('js/form-buttons.js') }}"></script>
-    <script src="{{ asset('js/form-storing.js') }}"></script>
-    <script src="{{ asset('js/form-interactive.js') }}"></script>
-    <script src="{{ asset('js/form-validation.js') }}"></script>
+    <script src="{{ asset('js/form/form-buttons.js') }}"></script>
+    <script src="{{ asset('js/form/form-storing.js') }}"></script>
+    <script src="{{ asset('js/form/form-interactive.js') }}"></script>
+    <script src="{{ asset('js/form/form-validation.js') }}"></script>
   </x-slot>
 </x-layout>

@@ -102,8 +102,21 @@ class TestController extends Controller
         ]);
     }
 
-    public function review(Request $request)
+    public function review(Test $test, Request $request)
     {
+        $questions = $test->questions()->get();
+        $correctAnswersAll = [];
+        foreach ($questions as $question) {
+            $correctAnswers = [];
+            $answers = $question->answers()->get();
+            foreach ($answers as $answer) {
+                if ($answer->correct) {
+                    $correctAnswers[] = $answer->text;
+                }
+            }
+            $correctAnswersAll[] = $correctAnswers;
+        }
+        dd($correctAnswersAll);
         dd($request->all());
     }
 }
